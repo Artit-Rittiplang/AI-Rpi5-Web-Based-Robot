@@ -1,14 +1,17 @@
-# Rpi5_Webserver_ESP32
-I control an RPi 5 robot car remotely via Wi-Fi.
-The control flow is: User → web server → Wi-Fi → RPi 5 (brain) → ESP32 → devices.
-The ESP32 connection is based on in my section “ros_bridge_esp32” https://github.com/Artit-Rittiplang/ros_bridge_esp32.git, and the RPi 5 server code is provided in this section.
+## 🌟 Key Features
 
-* Note
-  
-  in "serial_io.py" set /dev/ttyUSB0 or /dev/ttyUSB1 or so on
+### 🎮 Low-Latency Control
+This project utilizes a custom **Async/Await JavaScript loop** to handle motor commands. Unlike standard timer-based approaches, this ensures that:
+- **No Command Buffering:** The browser synchronizes with the robot's processing speed.
+- **Instant Response:** The robot stops the millisecond the user releases the control.
 
-  in "camera_ai.py" set cv2.VideoCapture(0) or cv2.VideoCapture(1) or so on
+### 🛑 Safety Mechanisms
+Safety is a priority in this control system:
+- **Fail-Safe Stopping:** Uses a "Double-Stop" redundancy method (sends stop command twice) to handle potential packet loss.
+- **Touch Guard:** Implements `ontouchcancel` events to prevent "runaway" scenarios if a finger slips off the controls on mobile devices.
 
-<img width="1650" height="808" alt="image" src="https://github.com/user-attachments/assets/c2147dfc-d5fc-4d73-954c-e13089ed5d4c" />
-
+### 📱 Interface
+- **3-Axis Servo Control:** Sliders for controlling 3 separate servos.
+- **Mobile Optimized:** CSS prevents zooming/selecting during rapid tapping.
+- **Live Telemetry:** AJAX fetch calls provide real-time updates for encoders and sensor data.
 
